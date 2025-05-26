@@ -1,0 +1,398 @@
+/* ─────────────────────────────
+🎨 VARIABLES DE COLOR
+───────────────────────────── */
+:root {
+    overflow-x: hidden;
+  --primary: #107bb9;
+  --primary-dark: #0d5f91;
+  --secondary: #f8d347;
+  --secondary-dark: #e6be33;
+  --accent: #66FCF1;
+  --dark-bg: #050609;
+  --light-text: #FFFFFF;
+  --muted-text: #CCCCCC;
+  --muted-bg: #111225;
+  --card-bg: #0f1428;
+  --modal-bg: #102a43;
+  --border-color: #424242;
+  --hover-link: #E5EDF1;
+  --link: #96C2DB;
+  --glass-bg: rgba(255, 255, 255, 0.04);       /* fondo translúcido */
+  --glass-border: rgba(255, 255, 255, 0.12);   /* borde tenue blanco */
+  --glass-shadow: rgba(102, 252, 241, 0.15);   /* sombra aqua suave */
+  --glass-shadow-hover: rgba(102, 252, 241, 0.35); /* en hover */
+}
+
+/* ─────────────────────────────
+🌐 BASE GENERAL
+───────────────────────────── */
+/* Fondo de partículas animado */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/src/apps/landing/assets/images/particlesbackground.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: -10;
+  opacity: 0.2;
+  animation: slowPan 60s linear infinite;
+}
+
+.text-important {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+/* Efecto de desplazamiento sutil */
+@keyframes slowPan {
+  0% {
+    background-position: center top;
+  }
+  50% {
+    background-position: center bottom;
+  }
+  100% {
+    background-position: center top;
+  }
+}
+
+
+body {
+  background-color: var(--dark-bg)  !important;
+  background-size: 400% 400%;
+  animation: gradientBG 18s ease infinite;
+  color: var(--light-text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden; /* 👈 esto bloquea scroll horizontal inesperado */
+}
+
+.fullscreen-centered {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* opcional si usas múltiples elementos */
+  text-align: center;
+}
+
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+section { padding: 4rem 1.5rem; }
+h2, h3, h4 { font-weight: bold; }
+.qpass { color: var(--primary); font-weight: bold; }
+.form-check-label, .modal-title { color: var(--muted-text); }
+
+
+
+/* ─────────────────────────────
+🔗 LINKS
+───────────────────────────── */
+a { text-decoration: none; color: var(--link); }
+a:hover { color: var(--hover-link); }
+
+/* ─────────────────────────────
+
+/* ─────────────────────────────
+🚀 HERO SECTION
+───────────────────────────── */
+.hero img { max-width: 100%; height: auto; }
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+.hero .container { position: relative; z-index: 2; }
+
+/* ─────────────────────────────
+✨ ANIMACIONES
+───────────────────────────── */
+.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+
+.fade-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.fade-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.fade-in.fade-left,
+.fade-in.fade-right {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* Animaciones al hacer scroll */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-animate.from-left {
+  transform: translateX(-50px);
+}
+
+.scroll-animate.from-right {
+  transform: translateX(50px);
+}
+
+.scroll-animate.animate {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+
+/* ─────────────────────────────
+📦 CARDS
+───────────────────────────── */
+.card {
+  background-color: transparent !important;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(16, 123, 185, 0.3);
+}
+.card h3, .card h4 { color: var(--light-text); font-weight: 600; }
+.card p { font-size: 0.95rem; color: var(--light-text); }
+.card-hover:hover {
+  transform: scale(1.03);
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+.card-glass {
+  background: var(--glass-bg, rgba(16, 123, 185, 0.06)) !important;
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.12));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 0 20px var(--glass-shadow, rgba(102, 252, 241, 0.15));
+  transition: all 0.4s ease;
+}
+
+
+.card-glass:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 28px var(--glass-shadow-hover);
+}
+
+
+
+
+/* ─────────────────────────────
+🎯 BOTONES
+───────────────────────────── */
+.btn-info {
+  background-color: var(--primary);
+  color: var(--dark-bg);
+  border: none;
+}
+.btn-info:hover {
+  background-color: var(--primary-dark);
+  color: var(--light-text);
+}
+.btn-warning {
+  background-color: var(--secondary);
+  color: var(--dark-bg);
+  border: none;
+}
+.btn-warning:hover {
+  background-color: var(--secondary-dark);
+  color: var(--dark-bg);
+}
+.btn-outline-light:hover {
+  background-color: var(--card-bg);
+  color: var(--light-text);
+}
+
+.neon-glow {
+  background-color: var(--primary);
+  color: var(--dark-bg);
+  border: none;
+  box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+  transition: all 0.3s ease-in-out;
+}
+
+.neon-glow:hover {
+  background-color: var(--primary-dark);
+  color: #fff;
+  box-shadow: 0 0 12px var(--primary), 0 0 24px var(--primary), 0 0 36px var(--primary);
+}
+/* ─────────────────────────────
+🧭 NAVBAR
+───────────────────────────── */
+#mainNavbar {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.navbar-brand { font-weight: bold; }
+.language-selector {
+  border: 1px solid var(--accent);
+  padding: 0.25rem 0.5rem;
+}
+
+.nav-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: var(--bs-info);
+  border-radius: 4px;
+}
+
+
+/* ─────────────────────────────
+🎯 BOTÓN SCROLL TO TOP
+───────────────────────────── */
+#scrollTopBtn.scroll-arrow {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  color: #66FCF1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1050;
+  padding: 0;
+}
+
+#scrollTopBtn.scroll-arrow.show {
+  opacity: 0.6;
+}
+
+#scrollTopBtn.scroll-arrow:hover {
+  opacity: 1;
+  color: #ffffff;
+}
+
+
+/* ─────────────────────────────
+💬 DROPDOWNS CON HOVER
+───────────────────────────── */
+.dropdown-hover { position: relative; }
+.hover-dropdown {
+  display: none;
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+.dropdown-hover:hover .hover-dropdown {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+.hover-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 8px 8px 8px;
+  border-style: solid;
+  border-color: transparent transparent #212529 transparent;
+}
+
+/* ─────────────────────────────
+📢 FOOTER
+───────────────────────────── */
+footer { font-size: 0.95rem; }
+footer a { color: var(--accent); }
+footer a:hover { color: var(--light-text); }
+
+/* ─────────────────────────────
+📱 CTA (Call To Action)
+───────────────────────────── */
+.cta .btn {
+  min-width: 180px;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+}
+
+
+
+/* ─────────────────────────────
+📊 TABLA QROSSPASS MEJORADA
+───────────────────────────── */
+.qrosspass-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: var(--card-bg);
+  color: var(--light-text);
+  font-size: 0.95rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(16, 123, 185, 0.3);
+}
+
+.qrosspass-table thead {
+  background-color: var(--primary-dark);
+  color: var(--light-text);
+}
+
+.qrosspass-table th,
+.qrosspass-table td {
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.qrosspass-table th {
+  font-weight: bold;
+  background-color: var(--primary-dark);
+  color: #fff;
+}
+
+.qrosspass-table tbody tr:hover {
+  background-color: rgba(16, 123, 185, 0.08);
+  transition: background-color 0.3s ease;
+}
+
+.qrosspass-table td.cross {
+  color: var(--muted-text);
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 2rem;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px var(--primary-dark);
+  padding: 1rem;
+}

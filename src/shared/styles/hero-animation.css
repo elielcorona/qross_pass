@@ -1,0 +1,38 @@
+/* 📁 src/shared/styles/hero-animation.css */
+.hero-animated {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0B0C10, #101519, #1f2833, #111225);
+  background-size: 400% 400%;
+  animation: bgMove 20s ease infinite;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animaciones de entrada */
+.fade-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.fade-in.delay-1 { transition-delay: 0.3s; }
+.fade-in.delay-2 { transition-delay: 0.6s; }
+.fade-in.delay-3 { transition-delay: 1.2s; }
+
+/* Asegura que los elementos estén por encima del fondo */
+.hero-animated .container {
+  position: relative;
+  z-index: 2;
+}
